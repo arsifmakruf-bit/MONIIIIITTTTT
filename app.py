@@ -15,7 +15,7 @@ from zoneinfo import ZoneInfo
 
 FORM_URL = (
     "https://docs.google.com/forms/u/0/d/e/"
-    "1FAIpQLSdYY2hbRIhrCY_a06uH0keEsBBu8x6P3AzpZ2BmcmVERjaxpQ"
+    "1FAIpQLScd5tNNBOrQkyN58qnA9dRwNxbm1cot5D80rQthgIUpkkTQPw"
     "/formResponse"
 )
 
@@ -73,7 +73,6 @@ def clean(value):
 
     return str(value).strip()
 
-
 def get_pickup_time():
 
     global last_submit_time
@@ -86,13 +85,18 @@ def get_pickup_time():
     if last_submit_time is None:
 
         pickup = now - timedelta(
-            seconds=random.randint(15, 69)
+            seconds=random.randint(20, 40)
         )
 
     # Data berikutnya
     else:
 
-        pickup = last_submit_time
+        pickup = last_submit_time + timedelta(
+            seconds=random.randint(1, 10)
+        )
+
+    # Simpan pickup terakhir
+    last_submit_time = pickup
 
     return pickup
 
